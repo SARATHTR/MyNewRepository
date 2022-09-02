@@ -31,6 +31,8 @@
 		B73F796A28BDE7620038E1A9 /* TitilliumWeb-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B73F795E28BDE7620038E1A9 /* TitilliumWeb-Light.ttf */; };
 		B73F796F28BDF6150038E1A9 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73F796E28BDF6150038E1A9 /* ViewExtension.swift */; };
 		B73F797628BE1A9E0038E1A9 /* ContentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73F797528BE1A9E0038E1A9 /* ContentListModel.swift */; };
+		B7D8783528C1CE66002FBE56 /* ContentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D8783428C1CE66002FBE56 /* ContentListViewModel.swift */; };
+		B7D8783828C1CFDF002FBE56 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D8783728C1CFDF002FBE56 /* InternetConnectionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		B73F795E28BDE7620038E1A9 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
 		B73F796E28BDF6150038E1A9 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B73F797528BE1A9E0038E1A9 /* ContentListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListModel.swift; sourceTree = "<group>"; };
+		B7D8783428C1CE66002FBE56 /* ContentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModel.swift; sourceTree = "<group>"; };
+		B7D8783728C1CFDF002FBE56 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +114,10 @@
 		B73F791C28BDD9700038E1A9 /* Test Project */ = {
 			isa = PBXGroup;
 			children = (
+				B7D8783628C1CFB1002FBE56 /* Connectivity */,
 				B72D06A228BF71B900389D58 /* Delegates */,
 				B73F793128BDD99E0038E1A9 /* JSON */,
-				B72D06A128BF71A900389D58 /* View */,
-				B73F797428BE1A6E0038E1A9 /* Model */,
+				B7D8783228C1CDAE002FBE56 /* MVVM */,
 				B73F796D28BDF5FB0038E1A9 /* Extension */,
 				B73F793828BDE6F90038E1A9 /* Font */,
 				B73F792328BDD9700038E1A9 /* Main.storyboard */,
@@ -175,6 +179,32 @@
 				B73F797528BE1A9E0038E1A9 /* ContentListModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B7D8783228C1CDAE002FBE56 /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				B73F797428BE1A6E0038E1A9 /* Model */,
+				B72D06A128BF71A900389D58 /* View */,
+				B7D8783328C1CDD2002FBE56 /* View Model */,
+			);
+			path = MVVM;
+			sourceTree = "<group>";
+		};
+		B7D8783328C1CDD2002FBE56 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				B7D8783428C1CE66002FBE56 /* ContentListViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		B7D8783628C1CFB1002FBE56 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				B7D8783728C1CFDF002FBE56 /* InternetConnectionManager.swift */,
+			);
+			path = Connectivity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +297,9 @@
 				B73F791E28BDD9700038E1A9 /* AppDelegate.swift in Sources */,
 				B72D06A028BF70D500389D58 /* ListDataCollectionViewCell.swift in Sources */,
 				B73F796F28BDF6150038E1A9 /* ViewExtension.swift in Sources */,
+				B7D8783828C1CFDF002FBE56 /* InternetConnectionManager.swift in Sources */,
 				B73F797628BE1A9E0038E1A9 /* ContentListModel.swift in Sources */,
+				B7D8783528C1CE66002FBE56 /* ContentListViewModel.swift in Sources */,
 				B73F792028BDD9700038E1A9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

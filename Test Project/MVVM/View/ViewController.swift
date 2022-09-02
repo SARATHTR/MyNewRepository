@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionViewContentList: UICollectionView!
     
     var storedOffsets = [Int: CGFloat]()
-    var contentList: ContentListModel?
+    var contentListViewModel = ContentListViewModel()
+    var contentListData: ContentListModel?
     var contentArray = [Content]()
     
     var pageNumber = 1
@@ -41,7 +42,9 @@ class ViewController: UIViewController {
         baseView.layer.shadowRadius = 5
         baseView.layer.shadowOpacity = 0.6
         
-        apiCall(pageNumber: pageNumber)
+        contentListViewModel.contentListApiCall(pageNumber: pageNumber) { result in
+            apiResponse(response: result)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,37 +52,24 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
     }
     
-    func apiCall(pageNumber: Int) {
-        if let jsonRsponse = loadJson(fileName: "CONTENTLISTINGPAGE-PAGE\(pageNumber)") {
-            contentList = jsonRsponse
-            guard let datas = contentList?.page.contentItems.content else { return }
-            for data in datas {
-                contentArray.append(data)
-            }
-            paginationLimit = Int(contentList?.page.pageSize ?? "0") ?? 0
-            if self.contentArray.count < paginationLimit {
-              self.isLastPageFetched = true
-            }
-            if self.contentArray.count == 0 {
-              self.isLastPageFetched = true
-            }
-            
-            DispatchQueue.main.async {
-                self.collectionViewContentList.reloadData()
-            }
+    func apiResponse(response: ContentListModel?) {
+        guard let responseData = response else { return }
+        contentListData = responseData
+        guard let datas = contentListData?.page.contentItems.content else { return }
+        for data in datas {
+            contentArray.append(data)
         }
-    }
-    
-    func loadJson(fileName: String) -> ContentListModel? {
-        let decoder = JSONDecoder()
-        guard
-            let url = Bundle.main.url(forResource: fileName, withExtension: "json"),
-            let data = try? Data(contentsOf: url),
-            let contentData = try? decoder.decode(ContentListModel.self, from: data)
-        else {
-            return nil
+        paginationLimit = Int(contentListData?.page.pageSize ?? "0") ?? 0
+        if self.contentArray.count < paginationLimit {
+          self.isLastPageFetched = true
         }
-        return contentData
+        if self.contentArray.count == 0 {
+          self.isLastPageFetched = true
+        }
+        
+        DispatchQueue.main.async {
+            self.collectionViewContentList.reloadData()
+        }
     }
     
     @IBAction func barButtonAction(_ sender: UIButton) {
@@ -123,7 +113,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource,U
             print(isLastPageFetched)
             if contentArray.count - 1 == indexPath.row && contentArray.count % paginationLimit == 0 && isLastPageFetched == false {
                 self.pageNumber += 1
-                apiCall(pageNumber: self.pageNumber)
+                contentListViewModel.contentListApiCall(pageNumber: pageNumber) { result in
+                    apiResponse(response: result)
+                }
             }
         }
     }
